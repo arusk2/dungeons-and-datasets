@@ -4,11 +4,11 @@ import csv
 def filter_text(text):
     text = text.split('. ')
     # add a period if there isn't one.
+    text = [x for x in text if x]
     for i in range(len(text)):
         if text[i][-1] != ".":
             text[i] = text[i] + "."
     # remove any empty strings, just in case
-    text = [x for x in text if x]
     return text
 
 def import_desc():
