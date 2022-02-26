@@ -3,9 +3,9 @@ import os
 import json
 import spacy
 import re
+import pandas as pd
 
 nlp = spacy.load('en_core_web_sm')
-import pandas as pd
 # this script imports the crd3 dataset and converts it from JSON to a continuous, CSV file
 # with clear sentence breaks.
 
