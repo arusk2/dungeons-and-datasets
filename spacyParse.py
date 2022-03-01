@@ -13,7 +13,7 @@ def location_prob(row):
         doc = nlp(row['Text'])
         row['Text'] = doc
     else:
-        to_drop.append(row.index)
+        to_drop.append(row.name)
     return row
 
 
@@ -29,7 +29,6 @@ if __name__ == '__main__':
     data.drop_duplicates('Text', inplace=True)
     data.reset_index(inplace=True, drop=True)
     zeros = np.zeros(len(data.index))
-
     data = data.assign(LocProb=zeros)
     half = int(len(data) / 2)
     data_first = data.iloc[:half, :]
@@ -37,7 +36,7 @@ if __name__ == '__main__':
 
     # process the first half
     data_first.progress_apply(location_prob, axis=1)
-    data_first.drop(index=to_drop, inplace=True)
+    data_first.drop(to_drop, inplace=True)
     data_first.reset_index(inplace=True, drop=True)
     data_first.to_pickle('./CRD3_spacy_processed_1.gz')
 
