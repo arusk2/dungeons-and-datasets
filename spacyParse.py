@@ -35,15 +35,15 @@ if __name__ == '__main__':
     data_second = data.iloc[half+1:, :]
 
     # process the first half
-    data_first.progress_apply(location_prob, axis=1)
+    data_first = data_first.progress_apply(location_prob, axis=1)
     data_first.drop(to_drop, inplace=True)
     data_first.reset_index(inplace=True, drop=True)
     data_first.to_pickle('./CRD3_spacy_processed_1.gz')
 
     # process the second half
     to_drop.clear()
-    data_second.progress_apply(location_prob, axis=1)
-    data_second.drop(index=to_drop, inplace=True)
+    data_second = data_second.progress_apply(location_prob, axis=1)
+    data_second.drop(to_drop, inplace=True)
     data_second.reset_index(inplace=True, drop=True)
     data_second.to_pickle('./CRD3_spacy_processed_2.gz')
 
