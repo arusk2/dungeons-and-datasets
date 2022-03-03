@@ -16,7 +16,7 @@ def import_desc():
     # Testing input for input function
     # Rough input delimited by newline ? since input is paragraphs including . and , symbols
     choice = ""
-    with open("db_rough.csv", "a", encoding='utf-8') as file:
+    with open("db_rough_andrew.csv", "a", encoding='utf-8') as file:
         writer = csv.writer(file)
         while choice != "-1":
             # can eventually update to add some light metadata about subject of sentence as we parse

@@ -211,3 +211,5 @@ fabric.properties
 # Cython debug symbols
 cython_debug/
 
+# adding addData.py since I've made a change that I don't want to track.
+addData.py
