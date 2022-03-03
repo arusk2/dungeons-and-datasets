@@ -135,4 +135,5 @@ gen = pipeline(
 )
 gen_data = gen("You enter", max_length=512, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
-print(gen_data)
+for sentence in gen_data["generated_text"]:
+    print(sentence)
