@@ -9,7 +9,7 @@ tqdm.pandas()
 
 def spacy_multiprocess(dataframe):
     docs = []
-    for doc in tqdm(nlp.pipe(dataframe['Text'].astype('unicode').values, batch_size=50, n_process=-1),
+    for doc in tqdm(nlp.pipe(dataframe['Text'].astype('unicode').values, batch_size=1000, n_process=-1),
                     total=len(dataframe['Text'])):
         if doc.has_annotation("DEP"):
             docs.append(doc)
