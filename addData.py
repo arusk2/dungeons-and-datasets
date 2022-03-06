@@ -7,6 +7,10 @@ def filter_text(text):
     # remove empty strings
     text = [x for x in text if x]
     for i in range(len(text)):
+        # remove trailing/leading spaces
+        text[i] = text[i].strip()
+        # remove newline chars
+        text[i] = text[i].replace('\n', '')
         if text[i][-1] != ".":
             text[i] = text[i] + "."
     # remove any empty strings, just in case
