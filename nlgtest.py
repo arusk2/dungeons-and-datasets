@@ -140,17 +140,17 @@ gen = pipeline(
     model=model,
     tokenizer=tokenizer,
 )
-gen_data = gen("You enter", max_length=512, num_return_sequences=10)
+gen_data = gen("You enter", max_length=100, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
 
-gen_data = gen("The room", max_length=512, num_return_sequences=10)
+gen_data = gen("The room", max_length=100, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
 
-gen_data = gen("The door", max_length=512, num_return_sequences=10)
+gen_data = gen("The door", max_length=100, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
