@@ -145,7 +145,12 @@ gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
 
-gen_data = gen("The", max_length=512, num_return_sequences=10)
+gen_data = gen("The room", max_length=512, num_return_sequences=10)
+gen_data = pd.DataFrame(gen_data)
+for sentence in gen_data["generated_text"]:
+    print(sentence)
+
+gen_data = gen("The door", max_length=512, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
