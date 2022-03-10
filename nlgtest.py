@@ -8,6 +8,9 @@ from transformers import GPT2Tokenizer, TFGPT2LMHeadModel
 import seaborn as sns
 from datasets import Dataset, load_dataset
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 # import models
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2', pad_token='<|pad|>')
 model = TFGPT2LMHeadModel.from_pretrained('gpt2', use_cache=False,
@@ -17,6 +20,8 @@ model = TFGPT2LMHeadModel.from_pretrained('gpt2', use_cache=False,
 # read in data
 data = pd.read_csv('db_rough.csv')
 data.columns = ["text"]
+bos_token = "<|startoftext|>"
+eos_token = "<|endoftext|>"
 # convert to dataset
 dataset = Dataset.from_pandas(data)
 # preprocess and set up tokenizer
@@ -24,8 +29,10 @@ dataset = Dataset.from_pandas(data)
 # They mention that extra preprocessing needs to be done for TF version of GPT-2 so we'll use their guide
 MAX_TOKENS = 128
 def tokenize_fn(examples, tokenizer=tokenizer):
-    examples = [ex + "<|endoftext|>" for ex in examples["text"]] # add EOS token manually.
-    output = tokenizer(examples, add_special_tokens=True, max_length=MAX_TOKENS, truncation=True,
+    examples = [ex + eos_token for ex in examples["text"]] # add BOS & EOS token manually.
+    output = tokenizer(examples, add_special_tokens=True,
+                       max_length=MAX_TOKENS,
+                       truncation=True,
                        pad_to_max_length=True)
     # Apparently the labels aren't auto-shifted in TF models. In order to train, GPT needs to predict
     # next word. This is done by token id and needs to be manually shifted for now.
@@ -62,8 +69,8 @@ test = tf.data.Dataset.from_tensor_slices(
 
 # Now to train the model
 epochs = 5
-batch_size = 4
-init_learning_rate = .001
+batch_size = 2
+init_learning_rate = .0001
 buffer_size = len(train)
 train_ds = (
     train.shuffle(buffer_size).batch(batch_size, drop_remainder=True)
@@ -85,7 +92,7 @@ model.summary()
 now = datetime.now().strftime("%Y-%m-%d_%H%M")
 callbacks = [
     tf.keras.callbacks.EarlyStopping(
-        monitor="val_loss", verbose=1, patience=1, restore_best_weights=True
+        monitor="val_loss", verbose=1, patience=2, restore_best_weights=True
     )
 ]
 """ Checkpointing was weird so I removed it from the callbacks. Will troubleshoot later.
@@ -133,7 +140,17 @@ gen = pipeline(
     model=model,
     tokenizer=tokenizer,
 )
-gen_data = gen("You enter", max_length=512, num_return_sequences=10)
+gen_data = gen("You enter", max_length=100, num_return_sequences=10)
+gen_data = pd.DataFrame(gen_data)
+for sentence in gen_data["generated_text"]:
+    print(sentence)
+
+gen_data = gen("The room", max_length=100, num_return_sequences=10)
+gen_data = pd.DataFrame(gen_data)
+for sentence in gen_data["generated_text"]:
+    print(sentence)
+
+gen_data = gen("The door", max_length=100, num_return_sequences=10)
 gen_data = pd.DataFrame(gen_data)
 for sentence in gen_data["generated_text"]:
     print(sentence)
