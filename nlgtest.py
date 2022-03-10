@@ -92,7 +92,7 @@ model.summary()
 now = datetime.now().strftime("%Y-%m-%d_%H%M")
 callbacks = [
     tf.keras.callbacks.EarlyStopping(
-        monitor="val_loss", verbose=1, patience=2, restore_best_weights=True
+        monitor="val_loss", verbose=1, patience=3, restore_best_weights=True
     )
 ]
 """ Checkpointing was weird so I removed it from the callbacks. Will troubleshoot later.
