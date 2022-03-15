@@ -1,1 +1,2 @@
 *.gz filter=lfs diff=lfs merge=lfs -text
+CRD3_spacy_* filter=lfs diff=lfs merge=lfs -text
