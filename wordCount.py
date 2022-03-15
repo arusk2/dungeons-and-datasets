@@ -1,6 +1,6 @@
-# This script counts all the words currently in db_rough.csv and outputs the count
+# This script counts all the words currently in dungeons-dataset.csv and outputs the count
 
-with open('db_rough.csv', 'r', encoding='utf-8') as file:
+with open('dungeons-dataset.csv', 'r', encoding='utf-8') as file:
     lines = file.readlines()
     counts = dict()
     for line in lines:
