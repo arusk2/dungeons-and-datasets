@@ -1,5 +1,4 @@
 import spacy
-from spacy import displacy
 import torch
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
