@@ -36,3 +36,5 @@ For wizards that just want the dataset, cast "Magic Jar" on your computer then..
 1. Choose a release version.
 2. Download the csv or `curl https://github.com/arusk2/dungeons-and-datasets/releases/download/v0.0.2-alpha/dungeons-dataset.pkl -o dungeons-dataset.pkl`
 in your repository for the pickled dataframe.
+3. When reading in the raw csv, change the deliminator to '|', otherwise normally occurring commas will be interpreted
+as separate columns.

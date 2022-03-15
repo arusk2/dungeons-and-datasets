@@ -18,7 +18,7 @@ model = TFGPT2LMHeadModel.from_pretrained('gpt2', use_cache=False,
                                     eos_token_id=tokenizer.eos_token_id)
 
 # read in data
-data = pd.read_csv('dungeons-dataset.csv')
+data = pd.read_csv('dungeons-dataset.csv', sep='|', names=["LocationDescription"])
 data.columns = ["text"]
 bos_token = "<|startoftext|>"
 eos_token = "<|endoftext|>"
