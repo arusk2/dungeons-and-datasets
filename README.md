@@ -33,4 +33,5 @@ interpreter versions may vary.
 
 ## Packages
 1. Choose a package release version.
-2. Download the zip or ``
+2. Download the csv or `curl https://github.com/arusk2/dungeons-and-datasets/releases/download/v0.0.2-alpha/dungeons-dataset.pkl -o dungeons-dataset.pkl`
+in your repository for the pickled dataframe.
