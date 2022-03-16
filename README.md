@@ -23,6 +23,8 @@ Zach Grow
 Andrew Ruskamp-White  
 Joel Williams
 
+Read our [final paper here](https://github.com/arusk2/dungeons-and-datasets/blob/main/Final_Report_CS510NLP.pdf). 
+
 ## Installation
 1. Clone the repository or download the release package. In order to clone the spaCy processed CRD3 dataset, you must
 have [Git LFS](https://git-lfs.github.com/) installed.
